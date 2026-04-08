@@ -14,14 +14,14 @@ interface AnimationConfig {
   readonly mass?: number;
 }
 
-interface ShadowStyle extends Pick<
+type ShadowStyle = Pick<
   ViewStyle,
   | "shadowColor"
   | "shadowOffset"
   | "shadowOpacity"
   | "shadowRadius"
   | "elevation"
-> {}
+>;
 
 interface CurvedBottomTabsProps {
   tabs: Tab[];
@@ -68,11 +68,11 @@ type GradientTuple = readonly [string, string];
 
 interface NavigationState {
   index: number;
-  routes: Array<{
+  routes: {
     key: string;
     name: string;
     params?: any;
-  }>;
+  }[];
 }
 
 interface NavigationDescriptor {

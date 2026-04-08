@@ -3,7 +3,7 @@ import { Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function RegisterScreen() {
   return (
-    <View className="flex-1 justify-center bg-white px-6">
+    <View className="w-screen h-screen flex-1 justify-center bg-white px-6">
       <Text className="mb-8 text-center text-3xl font-bold text-zinc-900">
         Criar conta
       </Text>
