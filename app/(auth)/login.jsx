@@ -1,7 +1,8 @@
-import { Image } from "expo-image";
 import { Link, router } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {
+  ActivityIndicator,
+  Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -13,16 +14,107 @@ import {
   StatusBar,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/base/button";
+import { Toast } from "@/components/ui/molecules/Toast";
 
-import logoLogin from "../../assets/images/logoLogin.png";
+import logoLogin from "../../assets/images/logoLight.png";
 
 export default function LoginScreen() {
   const { width, height } = useWindowDimensions();
+  const submitTimeoutRef = useRef(null);
 
   const isCompactWidth = width < 380;
   const containerPaddingClassName = width < 360 ? "px-5" : "px-6";
   const heroHeightClassName = height < 700 ? "min-h-[260px]" : "min-h-[300px]";
   const roleButtonsClassName = isCompactWidth ? "flex-col" : "flex-row";
+  const submitButtonWidth = isCompactWidth ? 220 : 240;
+
+  const [userType, setUserType] = useState("aluno");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [form, setForm] = useState({
+    email: "",
+    senha: "",
+    cnpj: "",
+    idEmpresa: "",
+  });
+
+  useEffect(() => {
+    return () => {
+      if (submitTimeoutRef.current) {
+        clearTimeout(submitTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  function handleChange(name, value) {
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+
+  function handleSelectType(type) {
+    setUserType(type);
+
+    setForm((prev) => ({
+      ...prev,
+      cnpj: type === "empresa" ? prev.cnpj : "",
+      idEmpresa: type === "empresa" ? prev.idEmpresa : "",
+    }));
+  }
+
+  function handleLogin() {
+    let payload;
+
+    if (userType === "aluno") {
+      payload = {
+        tipo: "aluno",
+        email: form.email,
+        senha: form.senha,
+      };
+    } else {
+      payload = {
+        tipo: "empresa",
+        email: form.email,
+        senha: form.senha,
+        cnpj: form.cnpj,
+        id: form.idEmpresa,
+      };
+    }
+
+    console.log("Dados enviados ao login: ", payload);
+
+    // chamada da API pro envio de dados real ao backend aqui
+  }
+
+  function handleSubmit() {
+    if (isSubmitting) {
+      return;
+    }
+
+    handleLogin();
+    setIsSubmitting(true);
+
+    Toast.show(
+      <View>
+        <Text className="font-atkinson-bold text-base text-white">Sucesso</Text>
+        <Text className="mt-1 font-atkinson text-sm text-slate-100">
+          Login realizado com sucesso.
+        </Text>
+      </View>,
+      {
+        type: "success",
+        position: "top",
+        backgroundColor: "#2f3b69",
+        duration: 2200,
+      },
+    );
+
+    submitTimeoutRef.current = setTimeout(() => {
+      router.push("/home");
+    }, 700);
+  }
 
   return (
     <SafeAreaView className="flex-1 bg-[#2f3b69]" edges={["top"]}>
@@ -40,20 +132,25 @@ export default function LoginScreen() {
         >
           <View className="flex-1 bg-white">
             <View
-              className={`w-full items-center justify-center rounded-b-[80px] bg-[#2f3b69] pt-7 pb-8 ${containerPaddingClassName} ${heroHeightClassName}`}
+              className={`w-full items-center justify-center rounded-b-[110px] bg-[#2f3b69] pt-7 pb-8 ${containerPaddingClassName} ${heroHeightClassName}`}
             >
-              <View className="w-full max-w-[420px] items-center">
-                <Image
-                  source={logoLogin}
-                  contentFit="contain"
-                  className="mb-5 h-20 w-[72%] max-w-[240px]"
-                />
+              <View className="w-full max-w-[420px] items-center gap-6">
+                <View className="flex flex-row items-center justify-center gap-2">
+                  <Image
+                    source={logoLogin}
+                    className="h-20 w-[80px]"
+                    resizeMode="contain"
+                  />
+                  <Text className="text-6xl text-white font-atkinson-bold">
+                    Linka
+                  </Text>
+                </View>
 
-                <Text className="text-center text-3xl font-bold text-white">
+                <Text className="text-center text-3xl font-atkinson-bold text-white">
                   Bem-vindo(a)
                 </Text>
 
-                <Text className="mt-4 text-center text-lg leading-6 text-slate-200">
+                <Text className="text-center text-lg font-atkinson leading-6 text-slate-200">
                   Entre na sua conta para acompanhar atividades, acessar a
                   plataforma e continuar sua jornada com praticidade em qualquer
                   lugar.
@@ -64,37 +161,48 @@ export default function LoginScreen() {
             <View
               className={`w-full max-w-[420px] flex-1 self-center py-7 ${containerPaddingClassName}`}
             >
-              <Text className="text-3xl font-bold text-[#2f3b69]">Login</Text>
-              <Text className="mt-2 text-base leading-6 text-zinc-500">
+              <Text className="text-3xl font-atkinson-bold text-[#2f3b69]">Login</Text>
+              <Text className="mt-2 text-base leading-6 text-zinc-500 font-atkinson">
                 Escolha seu perfil e preencha seus dados para entrar.
               </Text>
 
               <View className={`mt-6 gap-3 ${roleButtonsClassName}`}>
                 <TouchableOpacity
-                  className="flex-1 rounded-2xl bg-[#2f3b69] px-4 py-4"
+                  className={`flex-1 rounded-xl px-4 py-4 border border-border ${userType === "aluno" ? "bg-[#2f3b69]" : "bg-zinc-200"
+                    }`}
                   activeOpacity={0.9}
-                  onPress={() => router.push("/home")}
+                  onPress={() => handleSelectType("aluno")}
                 >
                   <View className="flex-row items-center justify-center gap-3">
-                    <FontAwesome name="user-o" size={18} color="#ffffff" />
-                    <Text className="text-base font-semibold text-white">
+                    <FontAwesome
+                      name="user-o"
+                      size={18}
+                      color={userType === "aluno" ? "#fff" : "#3f3f46"}
+                    />
+                    <Text
+                      className={`text-base font-atkinson-bold ${userType === "aluno" ? "text-white" : "text-zinc-700"
+                        }`}>
                       Aluno
                     </Text>
                   </View>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  className="flex-1 rounded-2xl bg-[#ffde59] px-4 py-4"
+                  className={`flex-1 rounded-xl px-4 py-4 border border-border ${userType === "empresa" ? "bg-[#ffde59]" : "bg-zinc-200"
+                    }`}
                   activeOpacity={0.9}
-                  onPress={() => router.push("/home")}
+                  onPress={() => handleSelectType("empresa")}
                 >
                   <View className="flex-row items-center justify-center gap-3">
                     <FontAwesome
                       name="building-o"
                       size={18}
-                      color="#2f3b69"
+                      color={userType === "empresa" ? "#2f3b69" : "#3f3f46"}
                     />
-                    <Text className="text-base font-semibold text-[#2f3b69]">
+                    <Text
+                      className={`text-base font-atkinson-bold ${userType === "empresa" ? "text-[#2f3b69]" : "text-zinc-700"
+                        }`}
+                    >
                       Empresa
                     </Text>
                   </View>
@@ -116,6 +224,27 @@ export default function LoginScreen() {
                   secureTextEntry
                   className="rounded-2xl border border-zinc-200 bg-white px-4 py-4 text-base text-zinc-900"
                 />
+
+                {userType === "empresa" && (
+                  <>
+                    <TextInput
+                      placeholder="CNPJ"
+                      placeholderTextColor="#71717a"
+                      keyboardType="email-address"
+                      value={form.cnpj}
+                      onChangeText={(value) => handleChange("cnpj", value)}
+                      className="rounded-2xl border border-zinc-200 bg-white px-4 py-4 text-base text-zinc-900"
+                    />
+
+                    <TextInput
+                      placeholder="ID da empresa"
+                      placeholderTextColor="#71717a"
+                      value={form.idEmpresa}
+                      onChangeText={(value) => handleChange("idEmpresa", value)}
+                      className="rounded-2xl border border-zinc-200 bg-white px-4 py-4 text-base text-zinc-900"
+                    />
+                  </>
+                )}
               </View>
 
               <TouchableOpacity
@@ -128,16 +257,34 @@ export default function LoginScreen() {
                 </Text>
               </TouchableOpacity>
 
-              <TouchableOpacity
-                className="mt-8 rounded-2xl bg-[#2f3b69] px-4 py-4"
-                activeOpacity={0.9}
-                onPress={() => router.push("/home")}
-              >
-                <Text className="text-center text-lg font-semibold text-white">
-                  Entrar
-                </Text>
-              </TouchableOpacity>
-
+              <View className="w-full flex justify-center flex-row">
+                <View className="mt-8">
+                  <Button
+                    width={submitButtonWidth}
+                    height={58}
+                    borderRadius={12}
+                    backgroundColor="#2f3b69"
+                    loadingTextBackgroundColor="#27272a"
+                    isLoading={isSubmitting}
+                    onPress={handleSubmit}
+                    loadingText="Entrando..."
+                    loadingTextColor="#ffffff"
+                    loadingTextSize={30}
+                    showLoadingIndicator
+                    renderLoadingIndicator={() => (
+                      <View className="mr-2">
+                        <ActivityIndicator color="#ffffff" size="small" />
+                      </View>
+                    )}
+                  >
+                    <View className="items-center justify-center">
+                      <Text className="text-center text-3xl font-atkinson-bold text-white">
+                        Entrar
+                      </Text>
+                    </View>
+                  </Button>
+                </View>
+              </View>
               <Text className="mt-6 text-center text-base text-zinc-600">
                 Não tem conta?{" "}
                 <Link href="/cadastro" className="font-semibold text-[#2f3b69]">
