@@ -85,7 +85,7 @@ export default function LoginScreen() {
 
     console.log("Dados enviados ao login: ", payload);
 
-    // chamada da API pro envio de dados real ao backend aqui
+   
   }
 
   function handleSubmit() {
@@ -135,10 +135,10 @@ export default function LoginScreen() {
               className={`w-full items-center justify-center rounded-b-[110px] bg-[#2f3b69] pt-7 pb-8 ${containerPaddingClassName} ${heroHeightClassName}`}
             >
               <View className="w-full max-w-[420px] items-center gap-6">
-                <View className="flex flex-row items-center justify-center gap-2">
+                <View className="flex flex-row items-center justify-center">
                   <Image
                     source={logoLogin}
-                    className="h-20 w-[80px]"
+                    style={{ width: 60, height: 60 }}
                     resizeMode="contain"
                   />
                   <Text className="text-6xl text-white font-atkinson-bold">
@@ -146,23 +146,18 @@ export default function LoginScreen() {
                   </Text>
                 </View>
 
-                <Text className="text-center text-3xl font-atkinson-bold text-white">
+                <Text className="mt-2 text-center text-4xl font-atkinson-bold text-white">
                   Bem-vindo(a)
                 </Text>
-
-                <Text className="text-center text-lg font-atkinson leading-6 text-slate-200">
-                  Entre na sua conta para acompanhar atividades, acessar a
-                  plataforma e continuar sua jornada com praticidade em qualquer
-                  lugar.
-                </Text>
+          
               </View>
             </View>
 
             <View
               className={`w-full max-w-[420px] flex-1 self-center py-7 ${containerPaddingClassName}`}
             >
-              <Text className="text-3xl font-atkinson-bold text-[#2f3b69]">Login</Text>
-              <Text className="mt-2 text-base leading-6 text-zinc-500 font-atkinson">
+              <Text className="text-4xl font-atkinson-bold text-[#2f3b69]">Login</Text>
+              <Text className="mt-4 text-lg leading-6 text-zinc-500 font-atkinson">
                 Escolha seu perfil e preencha seus dados para entrar.
               </Text>
 
@@ -188,7 +183,7 @@ export default function LoginScreen() {
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  className={`flex-1 rounded-xl px-4 py-4 border border-border ${userType === "empresa" ? "bg-[#ffde59]" : "bg-zinc-200"
+                  className={`flex-1 rounded-xl px-4 py-4 border border-border ${userType === "empresa" ? "bg-[#2f3b69]" : "bg-zinc-200"
                     }`}
                   activeOpacity={0.9}
                   onPress={() => handleSelectType("empresa")}
@@ -197,10 +192,10 @@ export default function LoginScreen() {
                     <FontAwesome
                       name="building-o"
                       size={18}
-                      color={userType === "empresa" ? "#2f3b69" : "#3f3f46"}
+                      color={userType === "empresa" ? "#fff" : "#3f3f46"}
                     />
                     <Text
-                      className={`text-base font-atkinson-bold ${userType === "empresa" ? "text-[#2f3b69]" : "text-zinc-700"
+                      className={`text-base font-atkinson-bold ${userType === "empresa" ? "text-white" : "text-zinc-700"
                         }`}
                     >
                       Empresa
@@ -209,14 +204,26 @@ export default function LoginScreen() {
                 </TouchableOpacity>
               </View>
 
-              <View className="mt-6 gap-4">
-                <TextInput
-                  placeholder="E-mail"
-                  placeholderTextColor="#71717a"
-                  keyboardType="email-address"
-                  autoCapitalize="none"
-                  className="rounded-2xl border border-zinc-200 bg-white px-4 py-4 text-base text-zinc-900"
-                />
+             <View className="mt-6 gap-4">
+                {userType !== "empresa" && (
+                  <TextInput
+                    placeholder="E-mail"
+                    placeholderTextColor="#71717a"
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    className="rounded-2xl border border-zinc-200 bg-white px-4 py-4 text-base text-zinc-900"
+                  />
+                )}
+
+                {userType === "empresa" && (
+                  <TextInput
+                    placeholder="CNPJ"
+                    placeholderTextColor="#71717a"
+                    value={form.cnpj}
+                    onChangeText={(value) => handleChange("cnpj", value)}
+                    className="rounded-2xl border border-zinc-200 bg-white px-4 py-4 text-base text-zinc-900"
+                  />
+                )}
 
                 <TextInput
                   placeholder="Senha"
@@ -225,26 +232,6 @@ export default function LoginScreen() {
                   className="rounded-2xl border border-zinc-200 bg-white px-4 py-4 text-base text-zinc-900"
                 />
 
-                {userType === "empresa" && (
-                  <>
-                    <TextInput
-                      placeholder="CNPJ"
-                      placeholderTextColor="#71717a"
-                      keyboardType="email-address"
-                      value={form.cnpj}
-                      onChangeText={(value) => handleChange("cnpj", value)}
-                      className="rounded-2xl border border-zinc-200 bg-white px-4 py-4 text-base text-zinc-900"
-                    />
-
-                    <TextInput
-                      placeholder="ID da empresa"
-                      placeholderTextColor="#71717a"
-                      value={form.idEmpresa}
-                      onChangeText={(value) => handleChange("idEmpresa", value)}
-                      className="rounded-2xl border border-zinc-200 bg-white px-4 py-4 text-base text-zinc-900"
-                    />
-                  </>
-                )}
               </View>
 
               <TouchableOpacity
@@ -278,14 +265,14 @@ export default function LoginScreen() {
                     )}
                   >
                     <View className="items-center justify-center">
-                      <Text className="text-center text-3xl font-atkinson-bold text-white">
+                      <Text className="text-center text-2xl font-atkinson-bold text-white">
                         Entrar
                       </Text>
                     </View>
                   </Button>
                 </View>
               </View>
-              <Text className="mt-6 text-center text-base text-zinc-600">
+              <Text className="mt-8 text-center text-lg text-zinc-600">
                 Não tem conta?{" "}
                 <Link href="/cadastro" className="font-semibold text-[#2f3b69]">
                   Cadastre-se
