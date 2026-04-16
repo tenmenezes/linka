@@ -32,6 +32,8 @@ export default function LoginScreen() {
 
   const [userType, setUserType] = useState("aluno");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [focusedInput, setFocusedInput] = useState(null);
+
   const [form, setForm] = useState({
     email: "",
     senha: "",
@@ -84,8 +86,6 @@ export default function LoginScreen() {
     }
 
     console.log("Dados enviados ao login: ", payload);
-
-   
   }
 
   function handleSubmit() {
@@ -108,7 +108,7 @@ export default function LoginScreen() {
         position: "top",
         backgroundColor: "#2f3b69",
         duration: 2200,
-      },
+      }
     );
 
     submitTimeoutRef.current = setTimeout(() => {
@@ -149,22 +149,28 @@ export default function LoginScreen() {
                 <Text className="mt-2 text-center text-4xl font-atkinson-bold text-white">
                   Bem-vindo(a)
                 </Text>
-          
               </View>
             </View>
 
             <View
               className={`w-full max-w-[420px] flex-1 self-center py-7 ${containerPaddingClassName}`}
             >
-              <Text className="text-4xl font-atkinson-bold text-[#2f3b69]">Login</Text>
+              <View className="items-start">
+                <Text className="text-4xl font-atkinson-bold text-[#2f3b69]">
+                  Login
+                </Text>
+                <View className="mt-1 h-[4px] w-10 rounded-full bg-[#ffde59]" />
+              </View>
+
               <Text className="mt-4 text-lg leading-6 text-zinc-500 font-atkinson">
                 Escolha seu perfil e preencha seus dados para entrar.
               </Text>
 
               <View className={`mt-6 gap-3 ${roleButtonsClassName}`}>
                 <TouchableOpacity
-                  className={`flex-1 rounded-xl px-4 py-4 border border-border ${userType === "aluno" ? "bg-[#2f3b69]" : "bg-zinc-200"
-                    }`}
+                  className={`flex-1 rounded-xl border border-[#2f3b69] px-4 py-4 ${
+                    userType === "aluno" ? "bg-[#2f3b69]" : "bg-zinc-200"
+                  }`}
                   activeOpacity={0.9}
                   onPress={() => handleSelectType("aluno")}
                 >
@@ -175,16 +181,19 @@ export default function LoginScreen() {
                       color={userType === "aluno" ? "#fff" : "#3f3f46"}
                     />
                     <Text
-                      className={`text-base font-atkinson-bold ${userType === "aluno" ? "text-white" : "text-zinc-700"
-                        }`}>
+                      className={`text-base font-atkinson-bold ${
+                        userType === "aluno" ? "text-white" : "text-zinc-700"
+                      }`}
+                    >
                       Aluno
                     </Text>
                   </View>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  className={`flex-1 rounded-xl px-4 py-4 border border-border ${userType === "empresa" ? "bg-[#2f3b69]" : "bg-zinc-200"
-                    }`}
+                  className={`flex-1 rounded-xl border border-[#2f3b69] px-4 py-4 ${
+                    userType === "empresa" ? "bg-[#2f3b69]" : "bg-zinc-200"
+                  }`}
                   activeOpacity={0.9}
                   onPress={() => handleSelectType("empresa")}
                 >
@@ -195,8 +204,9 @@ export default function LoginScreen() {
                       color={userType === "empresa" ? "#fff" : "#3f3f46"}
                     />
                     <Text
-                      className={`text-base font-atkinson-bold ${userType === "empresa" ? "text-white" : "text-zinc-700"
-                        }`}
+                      className={`text-base font-atkinson-bold ${
+                        userType === "empresa" ? "text-white" : "text-zinc-700"
+                      }`}
                     >
                       Empresa
                     </Text>
@@ -204,40 +214,88 @@ export default function LoginScreen() {
                 </TouchableOpacity>
               </View>
 
-             <View className="mt-6 gap-4">
+              <View className="mt-6 gap-4">
                 {userType !== "empresa" && (
-                  <TextInput
-                    placeholder="E-mail"
-                    placeholderTextColor="#71717a"
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                    className="rounded-2xl border border-zinc-200 bg-white px-4 py-4 text-base text-zinc-900"
-                  />
+                  <View
+                    className={`rounded-2xl border bg-white px-4 ${
+                      focusedInput === "email"
+                        ? "border-[#2f3b69]/40 bg-[#2f3b69]/5"
+                        : "border-zinc-200"
+                    }`}
+                  >
+                    <TextInput
+                      placeholder="E-mail"
+                      placeholderTextColor="#71717a"
+                      keyboardType="email-address"
+                      autoCapitalize="none"
+                      value={form.email}
+                      onChangeText={(value) => handleChange("email", value)}
+                      onFocus={() => setFocusedInput("email")}
+                      onBlur={() => setFocusedInput(null)}
+                      className="py-4 text-base text-zinc-900"
+                      style={{
+                        outlineStyle: "none",
+                        boxShadow: "none",
+                        borderWidth: 0,
+                      }}
+                    />
+                  </View>
                 )}
 
                 {userType === "empresa" && (
-                  <TextInput
-                    placeholder="CNPJ"
-                    placeholderTextColor="#71717a"
-                    value={form.cnpj}
-                    onChangeText={(value) => handleChange("cnpj", value)}
-                    className="rounded-2xl border border-zinc-200 bg-white px-4 py-4 text-base text-zinc-900"
-                  />
+                  <View
+                    className={`rounded-2xl border bg-white px-4 ${
+                      focusedInput === "cnpj"
+                        ? "border-[#2f3b69]/40 bg-[#2f3b69]/5"
+                        : "border-zinc-200"
+                    }`}
+                  >
+                    <TextInput
+                      placeholder="CNPJ"
+                      placeholderTextColor="#71717a"
+                      value={form.cnpj}
+                      onChangeText={(value) => handleChange("cnpj", value)}
+                      onFocus={() => setFocusedInput("cnpj")}
+                      onBlur={() => setFocusedInput(null)}
+                      className="py-4 text-base text-zinc-900"
+                      style={{
+                        outlineStyle: "none",
+                        boxShadow: "none",
+                        borderWidth: 0,
+                      }}
+                    />
+                  </View>
                 )}
 
-                <TextInput
-                  placeholder="Senha"
-                  placeholderTextColor="#71717a"
-                  secureTextEntry
-                  className="rounded-2xl border border-zinc-200 bg-white px-4 py-4 text-base text-zinc-900"
-                />
-
+                <View
+                  className={`rounded-2xl border bg-white px-4 ${
+                    focusedInput === "senha"
+                      ? "border-[#2f3b69]/40 bg-[#2f3b69]/5"
+                      : "border-zinc-200"
+                  }`}
+                >
+                  <TextInput
+                    placeholder="Senha"
+                    placeholderTextColor="#71717a"
+                    secureTextEntry
+                    value={form.senha}
+                    onChangeText={(value) => handleChange("senha", value)}
+                    onFocus={() => setFocusedInput("senha")}
+                    onBlur={() => setFocusedInput(null)}
+                    className="py-4 text-base text-zinc-900"
+                    style={{
+                      outlineStyle: "none",
+                      boxShadow: "none",
+                      borderWidth: 0,
+                    }}
+                  />
+                </View>
               </View>
 
               <TouchableOpacity
                 className="mt-4 self-end"
                 activeOpacity={0.7}
-                onPress={() => { }}
+                onPress={() => router.push("/redefinir-senha")}
               >
                 <Text className="text-sm font-medium text-[#2f3b69]">
                   Esqueceu a senha?
@@ -272,6 +330,7 @@ export default function LoginScreen() {
                   </Button>
                 </View>
               </View>
+
               <Text className="mt-8 text-center text-lg text-zinc-600">
                 Não tem conta?{" "}
                 <Link href="/cadastro" className="font-semibold text-[#2f3b69]">
