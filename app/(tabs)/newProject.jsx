@@ -1,10 +1,10 @@
 import { router } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
 
-export default function HomeScreen() {
+export default function NewProjectScreen() {
   return (
     <View className="flex-1 items-center justify-center gap-4 bg-white px-6">
-      <Text className="text-2xl font-bold text-zinc-900 text-center">Projetos em destaque com mais visualizações, novos eventos adicionados, novos cursos adicionandos, empresas parceiras, oportunidades de emprego recém publicadas</Text>
+      <Text className="text-2xl font-bold text-zinc-900 text-center">Usuário poderá publicar novos projetos por aqui</Text>
       <TouchableOpacity
         className="rounded-xl bg-[#2f3b69] px-5 py-3"
         activeOpacity={0.9}
