@@ -295,7 +295,7 @@ export default function LoginScreen() {
               <TouchableOpacity
                 className="mt-4 self-end"
                 activeOpacity={0.7}
-                onPress={() => router.push("/redefinir-senha")}
+                onPress={() => router.push("/(tabs)/about")}
               >
                 <Text className="text-sm font-medium text-[#2f3b69]">
                   Esqueceu a senha?
