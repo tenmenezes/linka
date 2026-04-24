@@ -11,7 +11,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="home"
         options={{
-          title: "",
+          title: "Início",
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
               name={focused ? "home" : "home-outline"}
@@ -25,7 +25,7 @@ export default function TabsLayout() {
       <Tabs.Screen 
         name="opportunities"
         options={{
-          title: "",
+          title: "Vagas",
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
               name={focused ? "briefcase" : "briefcase-outline"}
@@ -39,7 +39,7 @@ export default function TabsLayout() {
       <Tabs.Screen 
         name="newProject"
         options={{
-          title: "",
+          title: "Criar",
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
               name={focused ? "add-circle" : "add-circle-outline"}
@@ -53,7 +53,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="about"
         options={{
-          title: "",
+          title: "Sobre",
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
               name={focused ? "people" : "people-outline"}
@@ -66,7 +66,7 @@ export default function TabsLayout() {
       <Tabs.Screen 
         name="profile"
         options={{
-        title: "",
+        title: "Perfil",
         tabBarIcon: ({ focused, color, size }) => (
           <Ionicons
             name={focused ? "person" : "person-outline"}
