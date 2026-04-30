@@ -10,7 +10,7 @@ export const processGradient = <T extends string[]>(
   colors?: T,
 ): GradientTuple => {
   if (!colors || colors.length === 0) {
-    return ["#6366f1", "#8b5cf6"] as const;
+    return ["#002B5B", "#002B5B"] as const;
   }
   if (colors.length === 1) {
     return [colors[0], colors[0]] as const;

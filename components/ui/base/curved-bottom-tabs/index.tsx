@@ -356,7 +356,7 @@ function CurvedBottomTabsCoreBase({
   currentIndex,
   onPress,
   gradient,
-  barHeight = 9,
+  barHeight = 6,
   buttonScale = 6,
   activeColor = "#ffffff",
   inactiveColor = "#cccccc",
@@ -527,7 +527,7 @@ function CurvedBottomTabsBase({
       tabs={tabs}
       currentIndex={state.index}
       onPress={handlePress}
-      gradient={gradients}
+      gradient={["#002B5B", "#002B5B"]}
     />
   );
 }
