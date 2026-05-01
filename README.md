@@ -1,50 +1,183 @@
-# Welcome to your Expo app 👋
+# 🔗 Linka
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+> Um ecossistema que conecta estudantes e empresas através de projetos acadêmicos, oportunidades e inovação.
 
-## Get started
+---
 
-1. Install dependencies
+## Sobre o Projeto
 
-   ```bash
-   npm install
-   ```
+O **Linka** é uma plataforma desenvolvida para conectar alunos universitários e empresas através de projetos acadêmicos.
 
-2. Start the app
+A proposta é simples: criar um ambiente onde estudantes possam **exibir seus projetos**, enquanto empresas podem **descobrir talentos, investir em ideias e criar oportunidades reais**.
 
-   ```bash
-   npx expo start
-   ```
+O Linka não é apenas um repositório de projetos — é um **ecossistema de conexão**, aprendizado e crescimento profissional.
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Objetivo
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Criar uma ponte entre:
 
-## Get a fresh project
+- Estudantes (de qualquer área)
+- Empresas
+- Projetos acadêmicos
+- Oportunidades reais
 
-When you're ready, run:
+Um app que realmente **"Linka" todos nós**.
+
+---
+
+## Funcionalidades
+
+### Para estudantes
+
+- Publicar projetos acadêmicos
+- Criar portfólio(perfil) dentro da plataforma
+- Receber contatos de empresas
+- Receber investimentos em projetos
+- Participar de eventos e oportunidades
+
+### Para empresas
+
+- Descobrir talentos
+- Investir em projetos
+- Publicar vagas
+- Criar eventos (hackathons, palestras, cursos)
+- Se conectar com estudantes de diversas áreas
+
+### Plataforma
+
+- Aba de projetos
+- Aba de oportunidades
+- Aba de vagas
+- Aba de eventos
+- Sistema de autenticação
+- Perfil de usuário
+
+---
+
+## Tecnologias Utilizadas
+
+### Frontend
+- React
+- React Native
+- NativeWind
+- OAuth
+- JWT
+- Bcrypt
+- Zod
+
+### Backend (API)
+- Node.js
+- Express
+- ORM (Prisma ou Drizzle)
+
+### Banco de Dados
+- Supabase
+- Supabase Storage
+
+---
+
+## 📂 Estrutura do Projeto
 
 ```bash
-npm run reset-project
+linka/
+│
+├── frontend/          # Aplicação web/mobile (React / React Native)
+├── backend/           # API (Node.js + Express)
+├── database/          # Scripts, migrations e configs
+├── docs/              # Documentação adicional
+│
+├── .env.example       # Variáveis de ambiente exemplo
+├── README.md
+└── RULES_COMMIT.md
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## Como Rodar o Projeto Localmente
 
-To learn more about developing your project with Expo, look at the following resources:
+> 📋 Pré-requisitos
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- Node.js instalado
+- Git instalado
+- Conta no Supabase
 
-## Join the community
+### Clonar o repositório
 
-Join our community of developers creating universal apps.
+```bash
+git clone https://github.com/seu-usuario/linka.git
+cd linka
+```
+### Backend
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+cd backend
+npm install
+```
+### Criar arquivo `.env` baseado no `.env.example`
+
+### Mobile (React Native)
+
+```bash
+cd frontend
+npx expo start
+```
+
+---
+
+## Como Contribuir
+
+> Contribuições são muito bem-vindas!
+
+### Passo a passo
+
+1. Faça um fork do projeto
+
+2. Crie uma branch:
+
+```bash
+git checkout -b feature/minha-feature
+```
+
+3. Faça suas alterações
+
+4. Commit:
+
+```bash
+git commit -m "feat: minha nova funcionalidade"
+```
+
+5. Push:
+
+```bash
+git push origin feature/minha-feature
+```
+
+6. Abra um Pull Request
+
+---
+
+## 👥 Equipe
+
+### 🚧 Desenvolvedores
+
+|  |  |
+|--|--|
+| <div align="center"><img src="https://github.com/seu-usuario.png" width="150px"/><br/><br/><a href="https://github.com/seu-usuario"><strong>Seu Nome</strong></a></div> | <div align="center"><img src="https://github.com/dev2.png" width="150px"/><br/><br/><a href="https://github.com/dev2"><strong>Dev 2</strong></a></div> |
+| <div align="center"><img src="https://github.com/dev3.png" width="150px"/><br/><br/><a href="https://github.com/dev3"><strong>Dev 3</strong></a></div> | <div align="center"><img src="https://github.com/dev4.png" width="150px"/><br/><br/><a href="https://github.com/dev4"><strong>Dev 4</strong></a></div> |
+
+---
+
+## Status do Projeto
+> 🚧 Em desenvolvimento
+
+## Visão futura
+
+- Sistema de investimento em projetos
+- Integração com banco
+- Criação das APIs e das rotas
+- Integração com universidades
+
+> Não é só sobre código.
+> > É sobre criar oportunidades reais.
