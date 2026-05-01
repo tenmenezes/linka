@@ -8,7 +8,7 @@ Este documento define as boas práticas de commits para manter o histórico orga
 
 Seguimos o padrão **Conventional Commits**:
 
-tipo: descrição curta
+- tipo: descrição curta
 
 ---
 
@@ -17,56 +17,56 @@ tipo: descrição curta
 ### feat
 Nova funcionalidade
 
-feat: adicionar tela de login
+- feat: adicionar tela de login
 
 ---
 
 ### fix
 Correção de bug
 
-fix: corrigir erro na autenticação JWT
+- fix: corrigir erro na autenticação JWT
 
 ---
 
 ### refactor
 Refatoração (sem alterar comportamento)
 
-refactor: melhorar estrutura do controller de usuários
+- refactor: melhorar estrutura do controller de usuários
 
 ---
 
 ### style
 Alterações visuais ou formatação (sem lógica)
 
-style: ajustar espaçamento do header
+- style: ajustar espaçamento do header
 
 ---
 
 ### perf
 Melhoria de performance
 
-perf: otimizar consulta no banco
+- perf: otimizar consulta no banco
 
 ---
 
 ### test
 Testes
 
-test: adicionar testes para rota de login
+- test: adicionar testes para rota de login
 
 ---
 
 ### docs
 Documentação
 
-docs: atualizar README com instruções de instalação
+- docs: atualizar README com instruções de instalação
 
 ---
 
 ### chore
 Tarefas gerais (config, deps, etc)
 
-chore: atualizar dependências
+- chore: atualizar dependências
 
 ---
 
@@ -90,10 +90,10 @@ chore: atualizar dependências
 
 ## Exemplo de fluxo correto
 
-feat: criar estrutura inicial do backend  
-feat: implementar autenticação JWT  
-fix: corrigir erro de token expirado  
-refactor: reorganizar pastas do projeto  
+1. feat: criar estrutura inicial do backend  
+2. feat: implementar autenticação JWT  
+3. fix: corrigir erro de token expirado  
+4. refactor: reorganizar pastas do projeto  
 
 ---
 
