@@ -164,8 +164,8 @@ git push origin feature/minha-feature
 
 |  |  |
 |--|--|
-| <div align="center"><img src="https://github.com/seu-usuario.png" width="150px"/><br/><br/><a href="https://github.com/seu-usuario"><strong>Seu Nome</strong></a></div> | <div align="center"><img src="https://github.com/dev2.png" width="150px"/><br/><br/><a href="https://github.com/dev2"><strong>Dev 2</strong></a></div> |
-| <div align="center"><img src="https://github.com/dev3.png" width="150px"/><br/><br/><a href="https://github.com/dev3"><strong>Dev 3</strong></a></div> | <div align="center"><img src="https://github.com/dev4.png" width="150px"/><br/><br/><a href="https://github.com/dev4"><strong>Dev 4</strong></a></div> |
+| <div align="center"><img src="https://github.com/tenmenezes.png" width="150px"/><br/><br/><a href="https://github.com/tenmenezes"><strong>Ten Menezes</strong></a></div> | <div align="center"><img src="https://github.com/mclarabastos.png" width="150px"/><br/><br/><a href="https://github.com/mclarabastos"><strong>Maria Clara</strong></a></div> |
+| <div align="center"><img src="https://github.com/YasmimMantovani.png" width="150px"/><br/><br/><a href="https://github.com/YasmimMantovani"><strong>Yasmim</strong></a></div> | <div align="center"><img src="https://github.com/tutunery.png" width="150px"/><br/><br/><a href="https://github.com/tutunery"><strong>Arthur</strong></a></div> |
 
 ---
 
