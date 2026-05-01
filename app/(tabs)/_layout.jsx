@@ -36,20 +36,6 @@ export default function TabsLayout() {
         }}
       />
 
-      <Tabs.Screen 
-        name="newProject"
-        options={{
-          title: "Criar",
-          tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons
-              name={focused ? "add-circle" : "add-circle-outline"}
-              color={color}
-              size={size}
-            />
-          ),
-        }}
-      />
-
       <Tabs.Screen
         name="about"
         options={{
