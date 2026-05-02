@@ -43,8 +43,8 @@ export default function Home() {
           <Ionicons name="menu-outline" size={28} color="#fff" />
         </TouchableOpacity> */}
 
-          <View className="flex justify-center items-center gap-2 flex-row">
-            <Text className="bg-zinc-600/50 rounded-xl">
+          <View className="flex justify-center items-center gap-4 flex-row">
+            <Text className="bg-black/40 rounded-xl p-1">
               <Image
                 source={Logo}
                 style={{ width: 40, height: 40 }}
