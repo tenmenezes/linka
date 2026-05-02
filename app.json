@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "linka",
-    "slug": "linka",
+    "name": "LINKA",
+    "slug": "LINKA",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/public/icon.png",
-    "scheme": "linka",
+    "scheme": "LINKA",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -35,7 +35,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/public/splash-icon.png",
+          "image": "./assets/images/logoDarkMode.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",

@@ -90,7 +90,7 @@ export default function Home() {
               keyExtractor={item => item.id}
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => (
-                <TouchableOpacity className="flex-row items-center bg-black px-4 py-2 rounded-full mr-3 mb-6 border border-[#E9ECEF]">
+                <TouchableOpacity className="flex-row items-center bg-[#2a2a2a] px-4 py-2 rounded-full mr-3 mb-6 border border-zinc-800">
                   <Ionicons name={item.icone} size={20} color="#fff" />
                   <Text className="ml-2 text-zinc-200 font-medium">{item.nome}</Text>
                 </TouchableOpacity>

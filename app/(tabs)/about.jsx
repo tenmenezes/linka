@@ -12,9 +12,11 @@ import {
   TouchableOpacity,
   View,
   useWindowDimensions,
+  StyleSheet,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
+import { BlurView } from "expo-blur";
 
 import logoLogin from "../../assets/images/logoLight.png";
 
@@ -24,7 +26,7 @@ const members = [
     nome: "Yago Menezes",
     descricao: "Desenvolvimento FullStack",
     descricaoCompleta:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Atua no desenvolvimento do aplicativo, colaborando na estrutura das telas e na experiência do usuário.",
+      "Atua no desenvolvimento fullstack da aplicação, sendo responsável pela implementação de funcionalidades, integração com APIs e construção da experiência do usuário. Tem foco em performance, organização de código e evolução contínua do produto.",
     foto: require("../../assets/images/members/membro2.jpeg"),
     linkedin: "https://linkedin.com/in/ten-menezes",
     github: "https://github.com/tenmenezes",
@@ -35,8 +37,8 @@ const members = [
     nome: "Arthur Nery",
     descricao: "Desenvolvimento & Planejamento",
     descricaoCompleta:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Participa da construção técnica do projeto e do planejamento das funcionalidades do app.",
-    foto: require("../../assets/images/members/membro1.jpeg"),
+      "Contribui tanto na parte técnica quanto no planejamento estratégico do projeto. Atua na definição de funcionalidades, estrutura do sistema e organização do desenvolvimento, garantindo alinhamento entre ideia, execução e propósito da aplicação.",
+    foto: require("../../assets/images/members/membro1.png"),
     linkedin: "https://www.linkedin.com/in/luiz-arthur-nery-leite",
     github: "https://github.com/tutunery",
     portfolio: "https://example.com/",
@@ -46,10 +48,10 @@ const members = [
     nome: "Yasmim Mantovani",
     descricao: "Designer UX/UI & Interface",
     descricaoCompleta:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Contribui com organização visual, pesquisa e alinhamento da proposta do aplicativo.",
-    foto: require("../../assets/images/members/membro3.jpeg"),
+      "Responsável pelo design UX/UI e identidade visual do aplicativo. Trabalha na criação de interfaces intuitivas, organização da experiência do usuário e alinhamento visual da plataforma, buscando sempre clareza, estética e usabilidade.",
+    foto: require("../../assets/images/members/membro3.png"),
     linkedin: "https://www.linkedin.com/in/yasmim-mantovani",
-    github: "www.github.com/yasmimmantovani",
+    github: "https://www.github.com/yasmimmantovani",
     portfolio: "https://example.com/",
   },
   {
@@ -57,8 +59,8 @@ const members = [
     nome: "Maria Clara Bastos",
     descricao: "Desenvolvimento FullStack",
     descricaoCompleta:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Participa do design, estruturação da interface e desenvolvimento do conceito visual da Linka.",
-    foto: require("../../assets/images/members/membro4.jpeg"),
+      "Atua no desenvolvimento fullstack e na construção da interface do aplicativo. Participa da estruturação visual e funcional do sistema, contribuindo para transformar ideias em soluções digitais bem organizadas e eficientes.",
+    foto: require("../../assets/images/members/membro4.png"),
     linkedin: "https://www.linkedin.com/in/mclara-bastos/",
     github: "https://github.com/mclarabastos",
     portfolio: "https://example.com/",
@@ -225,6 +227,47 @@ export default function AboutScreen() {
   const { width, height } = useWindowDimensions();
   const [selectedMember, setSelectedMember] = useState(null);
 
+  const slideAnim = useRef(new Animated.Value(height)).current;
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  // Dispara a animação de entrada quando um membro é selecionado
+  useEffect(() => {
+    if (selectedMember) {
+      slideAnim.setValue(height); // Garante que começa lá embaixo
+      Animated.parallel([
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.spring(slideAnim, {
+          toValue: 0,
+          friction: 8,
+          tension: 65, // Ajuste a tensão para deixar o slide mais suave ou rápido
+          useNativeDriver: true,
+        }),
+      ]).start();
+    }
+  }, [selectedMember, height]);
+
+  // Função para fechar o modal com animação de saída
+  const closeModal = () => {
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideAnim, {
+        toValue: height,
+        duration: 250,
+        useNativeDriver: true,
+      }),
+    ]).start(() => {
+      setSelectedMember(null); // Só limpa o estado depois que a animação termina
+    });
+  };
+
   const containerPaddingClassName = width < 360 ? "px-5" : "px-6";
   const heroHeightClassName = height < 700 ? "min-h-[185px]" : "min-h-[210px]";
   const logoSize = useMemo(() => (width < 360 ? 36 : 42), [width]);
@@ -303,7 +346,7 @@ export default function AboutScreen() {
               />
 
               <View className="flex-row items-center gap-3 mb-4">
-                  {/* Preencher algo aqui: imagem, ilustração ou sla */}
+                {/* Preencher algo aqui: imagem, ilustração ou sla */}
               </View>
 
             </View>
@@ -337,97 +380,116 @@ export default function AboutScreen() {
 
         <Modal
           visible={!!selectedMember}
-          animationType="slide"
+          animationType="none"
           transparent
-          onRequestClose={() => setSelectedMember(null)}
+          onRequestClose={closeModal}
         >
-          <Pressable
-            className="flex-1 justify-end bg-black/45"
-            onPress={() => setSelectedMember(null)}
-          >
-            <Pressable
-              className="w-full rounded-t-[32px] border-t border-x border-[#2f3b69]/10 bg-white px-6 pt-3 pb-10"
-              onPress={() => {}}
-              style={{ boxShadow: "0px -4px 24px rgba(0,0,0,0.12)" }}
-            >
-              <View className="items-center mb-4">
-                <View className="h-[4px] w-10 rounded-full bg-zinc-200" />
-              </View>
+          <View className="flex-1 justify-end">
 
-              {selectedMember && (
-                <>
-                  <View className="flex-row items-center gap-4">
-                    <View
-                      className="items-center justify-center rounded-full bg-[#3E829A]"
-                      style={{ width: 80, height: 80, padding: 3 }}
-                    >
+            {/* 1. FUNDO ANIMADO COM FADE E BLUR */}
+            <Animated.View
+              style={[
+                StyleSheet.absoluteFill,
+                { opacity: fadeAnim }
+              ]}
+            >
+              <Pressable style={StyleSheet.absoluteFill} onPress={closeModal}>
+                <BlurView
+                  intensity={40} // O blur agora será o protagonista visual
+                  tint="dark"
+                  style={StyleSheet.absoluteFillObject}
+                />
+              </Pressable>
+            </Animated.View>
+
+            {/* 2. CONTEÚDO ANIMADO COM SLIDE */}
+            <Animated.View
+              style={{ transform: [{ translateY: slideAnim }] }}
+            >
+              <View
+                className="w-full rounded-t-[32px] border-t border-x border-[#2f3b69]/10 bg-white px-6 pt-3 pb-10"
+                style={{ boxShadow: "0px -4px 24px rgba(0,0,0,0.12)" }}
+              >
+                <View className="items-center mb-4">
+                  <View className="h-[4px] w-10 rounded-full bg-zinc-200" />
+                </View>
+
+                {selectedMember && (
+                  <>
+                    <View className="flex-row items-center gap-4">
                       <View
-                        className="rounded-full overflow-hidden bg-zinc-200"
-                        style={{ width: 74, height: 74 }}
+                        className="items-center justify-center rounded-full bg-[#3E829A]"
+                        style={{ width: 80, height: 80, padding: 3 }}
                       >
-                        <Image
-                          source={selectedMember.foto}
-                          resizeMode="cover"
-                          style={{ width: "100%", height: "100%" }}
+                        <View
+                          className="rounded-full overflow-hidden bg-zinc-200"
+                          style={{ width: 74, height: 74 }}
+                        >
+                          <Image
+                            source={selectedMember.foto}
+                            resizeMode="cover"
+                            style={{ width: "100%", height: "100%" }}
+                          />
+                        </View>
+                      </View>
+
+                      <View className="flex-1">
+                        <Text className="text-[22px] font-atkinson-bold text-[#2f3b69]">
+                          {selectedMember.nome}
+                        </Text>
+                        <View className="mt-1 flex-row items-center gap-2">
+                          <Text className="text-[13px] text-zinc-400 font-atkinson">
+                            {selectedMember.descricao}
+                          </Text>
+                        </View>
+                      </View>
+
+                      <TouchableOpacity
+                        activeOpacity={0.8}
+                        onPress={closeModal} // <-- Usando a função de fechar
+                        className="h-9 w-9 items-center justify-center rounded-full bg-zinc-100"
+                      >
+                        <FontAwesome name="close" size={16} color="#2f3b69" />
+                      </TouchableOpacity>
+                    </View>
+
+                    <View className="mt-5 h-[1px] bg-zinc-100" />
+
+                    <Text className="mt-5 text-[15px] leading-7 text-zinc-600 font-atkinson">
+                      {selectedMember.descricaoCompleta}
+                    </Text>
+
+                    <View className="mt-6">
+                      <Text
+                        className="mb-3 text-xs font-atkinson-bold text-[#2f3b69] text-center uppercase"
+                        style={{ letterSpacing: 1 }}
+                      >
+                        Acesse minhas redes =)
+                      </Text>
+                      <View className="flex-row gap-3">
+                        <SocialButton
+                          icon="linkedin"
+                          label="LinkedIn"
+                          url={selectedMember.linkedin}
+                        />
+                        <SocialButton
+                          icon="github"
+                          label="GitHub"
+                          url={selectedMember.github}
+                        />
+                        <SocialButton
+                          icon="globe"
+                          label="Portfólio"
+                          url={selectedMember.portfolio}
                         />
                       </View>
                     </View>
+                  </>
+                )}
+              </View>
+            </Animated.View>
 
-                    <View className="flex-1">
-                      <Text className="text-[22px] font-atkinson-bold text-[#2f3b69]">
-                        {selectedMember.nome}
-                      </Text>
-                      <View className="mt-1 flex-row items-center gap-2">
-                        <Text className="text-[13px] text-zinc-400 font-atkinson">
-                          {selectedMember.descricao}
-                        </Text>
-                      </View>
-                    </View>
-
-                    <TouchableOpacity
-                      activeOpacity={0.8}
-                      onPress={() => setSelectedMember(null)}
-                      className="h-9 w-9 items-center justify-center rounded-full bg-zinc-100"
-                    >
-                      <FontAwesome name="close" size={16} color="#2f3b69" />
-                    </TouchableOpacity>
-                  </View>
-
-                  <View className="mt-5 h-[1px] bg-zinc-100" />
-
-                  <Text className="mt-5 text-[15px] leading-7 text-zinc-600 font-atkinson">
-                    {selectedMember.descricaoCompleta}
-                  </Text>
-
-                  <View className="mt-6">
-                    <Text
-                      className="mb-3 text-xs font-atkinson-bold text-[#2f3b69] text-center uppercase"
-                      style={{ letterSpacing: 1 }}
-                    >
-                      Acesse minhas redes =)
-                    </Text>
-                    <View className="flex-row gap-3">
-                      <SocialButton
-                        icon="linkedin"
-                        label="LinkedIn"
-                        url={selectedMember.linkedin}
-                      />
-                      <SocialButton
-                        icon="github"
-                        label="GitHub"
-                        url={selectedMember.github}
-                      />
-                      <SocialButton
-                        icon="globe"
-                        label="Portfólio"
-                        url={selectedMember.portfolio}
-                      />
-                    </View>
-                  </View>
-                </>
-              )}
-            </Pressable>
-          </Pressable>
+          </View>
         </Modal>
       </View>
     </SafeAreaView>
