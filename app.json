@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Linka",
-    "slug": "Linka",
+    "slug": "linka",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/public/icon.png",
@@ -61,6 +61,7 @@
     },
     "updates": {
       "url": "https://u.expo.dev/7c847475-5643-4947-a336-f1b69fd281f3"
-    }
+    },
+    "owner": "tenmenezes"
   }
 }

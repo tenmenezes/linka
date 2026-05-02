@@ -81,16 +81,177 @@ Um app que realmente **"Linka" todos nós**.
 ## 📂 Estrutura do Projeto
 
 ```bash
-linka/
-│
-├── frontend/          # Aplicação web/mobile (React / React Native)
-├── backend/           # API (Node.js + Express)
-├── database/          # Scripts, migrations e configs
-├── docs/              # Documentação adicional
-│
-├── .env.example       # Variáveis de ambiente exemplo
+├── app
+│   ├── (auth)
+│   │   ├── _layout.jsx
+│   │   ├── cadastro.jsx
+│   │   ├── login.jsx
+│   │   └── redefinir-senha.jsx
+│   ├── (tabs)
+│   │   ├── _layout.jsx
+│   │   ├── about.jsx
+│   │   ├── home.jsx
+│   │   ├── opportunities.jsx
+│   │   └── profile.jsx
+│   ├── _layout.jsx
+│   └── index.jsx
+├── assets
+│   ├── fonts
+│   │   ├── AtkinsonHyperlegible-Bold.ttf
+│   │   └── AtkinsonHyperlegible-Regular.ttf
+│   ├── images
+│   │   ├── members
+│   │   │   ├── membro1.png
+│   │   │   ├── membro2.jpeg
+│   │   │   ├── membro3.png
+│   │   │   └── membro4.png
+│   │   ├── logoDark2Linka.png
+│   │   ├── logoDarkIcon.png
+│   │   ├── logoDarkLinka.png
+│   │   ├── logoDarkMode.png
+│   │   ├── logoDarkMode2.png
+│   │   ├── logoLight.png
+│   │   └── logoLightLinka.png
+│   └── public
+│       ├── favicon.png
+│       ├── icon.png
+│       └── splash-icon.png
+├── components
+│   ├── auth
+│   │   ├── login
+│   │   └── register
+│   ├── home
+│   │   ├── ProjectCard
+│   │   │   └── index.jsx
+│   │   └── navigation
+│   │       └── index.jsx
+│   └── ui
+│       ├── base
+│       │   ├── avatar
+│       │   │   ├── index.tsx
+│       │   │   └── types.ts
+│       │   ├── badge
+│       │   │   ├── conf.ts
+│       │   │   ├── index.tsx
+│       │   │   └── types.ts
+│       │   ├── button
+│       │   │   ├── index.tsx
+│       │   │   └── types.ts
+│       │   ├── curved-bottom-tabs
+│       │   │   ├── helper.ts
+│       │   │   ├── index.tsx
+│       │   │   └── types.ts
+│       │   ├── empty-state
+│       │   │   ├── index.tsx
+│       │   │   └── types.ts
+│       │   ├── otp-input
+│       │   │   ├── const.ts
+│       │   │   ├── index.tsx
+│       │   │   └── types.ts
+│       │   ├── scrollable-search
+│       │   │   ├── index.tsx
+│       │   │   └── types.ts
+│       │   ├── tabs
+│       │   │   ├── index.tsx
+│       │   │   └── types.ts
+│       │   └── title
+│       │       ├── const.ts
+│       │       ├── helpers.ts
+│       │       ├── index.tsx
+│       │       └── types.ts
+│       ├── micro-interactions
+│       │   ├── animated-theme-toggle
+│       │   │   ├── const.ts
+│       │   │   ├── index.tsx
+│       │   │   └── types.ts
+│       │   ├── gooey-switch
+│       │   │   ├── const.ts
+│       │   │   ├── index.tsx
+│       │   │   └── types.ts
+│       │   ├── hamburger
+│       │   │   ├── index.tsx
+│       │   │   └── types.ts
+│       │   └── spin-button
+│       │       ├── conf.ts
+│       │       ├── index.tsx
+│       │       └── types.ts
+│       ├── molecules
+│       │   ├── Shimmer
+│       │   │   ├── Shimmer.tsx
+│       │   │   ├── Shimmer.types.ts
+│       │   │   └── const.ts
+│       │   ├── Toast
+│       │   │   ├── context
+│       │   │   │   └── ToastContext.tsx
+│       │   │   ├── hooks
+│       │   │   │   └── useToast.ts
+│       │   │   ├── Toast.tsx
+│       │   │   ├── Toast.types.ts
+│       │   │   ├── ToastViewPort.tsx
+│       │   │   └── index.tsx
+│       │   ├── accordion
+│       │   │   ├── index.tsx
+│       │   │   ├── presets.ts
+│       │   │   └── types.ts
+│       │   ├── animated-chip
+│       │   │   ├── AnimatedChip.tsx
+│       │   │   ├── Chip.tsx
+│       │   │   └── Chip.types.ts
+│       │   ├── circle-loader
+│       │   │   ├── index.tsx
+│       │   │   └── types.ts
+│       │   ├── disclosure-group
+│       │   │   ├── conf.ts
+│       │   │   ├── index.tsx
+│       │   │   └── types.ts
+│       │   ├── orbiting-dots
+│       │   │   ├── index.tsx
+│       │   │   └── types.ts
+│       │   └── search-bar
+│       │       ├── SearchBar.tsx
+│       │       └── SearchBar.types.ts
+│       ├── organisms
+│       │   ├── circular-progress
+│       │   │   ├── index.tsx
+│       │   │   └── types.ts
+│       │   ├── dialog
+│       │   │   ├── index.tsx
+│       │   │   └── types.ts
+│       │   ├── dropdown
+│       │   │   ├── const.ts
+│       │   │   ├── index.tsx
+│       │   │   └── types.ts
+│       │   └── theme-switch
+│       │       ├── conf.ts
+│       │       ├── context.tsx
+│       │       ├── helpers.ts
+│       │       ├── hooks.ts
+│       │       ├── theme.tsx
+│       │       └── types.ts
+│       └── templates
+│           └── bottom-sheet
+│               ├── conf.ts
+│               ├── index.tsx
+│               ├── types.ts
+│               └── utils.ts
+├── constants
+│   └── layout.ts
+├── .gitignore
+├── LICENSE
 ├── README.md
-└── RULES_COMMIT.md
+├── RULES_COMMIT.md
+├── app.json
+├── babel.config.js
+├── component.config.json
+├── eas.json
+├── eslint.config.js
+├── global.css
+├── metro.config.js
+├── nativewind-env.d.ts
+├── package-lock.json
+├── package.json
+├── tailwind.config.js
+└── tsconfig.json
 ```
 
 ---
@@ -155,6 +316,14 @@ git push origin feature/minha-feature
 ```
 
 6. Abra um Pull Request
+
+---
+
+## Boas práticas de Commit
+
+Para que o seu pull request e suas alterações sejam aceitas, é necessário que seja seguido as boas práticas de commit.
+
+### Acesse Aqui: [Boas Práticas](./RULES_COMMIT.md)
 
 ---
 
