@@ -1,12 +1,14 @@
 import React from 'react';
 import {
-  View, Text, ScrollView, FlatList, TouchableOpacity, Dimensions, StyleSheet
+  View, Text, ScrollView, FlatList, TouchableOpacity, Dimensions, StyleSheet,
+  Image
 } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import ProjectCard from '../../components/home/ProjectCard';
 
 import { TAB_BAR_HEIGHT } from '../../constants/layout'
+import Logo from '../../assets/images/logoLight.png'
 
 const { width } = Dimensions.get('window');
 
@@ -41,7 +43,16 @@ export default function Home() {
           <Ionicons name="menu-outline" size={28} color="#fff" />
         </TouchableOpacity> */}
 
-          <Text className="text-white text-2xl text-center font-bold font-atkinson-bold">Linka</Text>
+          <View className="flex justify-center items-center gap-2 flex-row">
+            <Text className="bg-zinc-600/50 rounded-xl">
+              <Image
+                source={Logo}
+                style={{ width: 40, height: 40 }}
+                resizeMode='contain'
+              />
+            </Text>
+            <Text className="text-white text-2xl text-center font-bold font-atkinson-bold">Linka</Text>
+          </View>
 
           <View className="flex-row">
             {/* <TouchableOpacity>
