@@ -395,7 +395,7 @@ export default function AboutScreen() {
             >
               <Pressable style={StyleSheet.absoluteFill} onPress={closeModal}>
                 <BlurView
-                  intensity={40} // O blur agora será o protagonista visual
+                  intensity={40}
                   tint="dark"
                   style={StyleSheet.absoluteFillObject}
                 />
@@ -446,7 +446,7 @@ export default function AboutScreen() {
 
                       <TouchableOpacity
                         activeOpacity={0.8}
-                        onPress={closeModal} // <-- Usando a função de fechar
+                        onPress={closeModal}
                         className="h-9 w-9 items-center justify-center rounded-full bg-zinc-100"
                       >
                         <FontAwesome name="close" size={16} color="#2f3b69" />
@@ -464,7 +464,7 @@ export default function AboutScreen() {
                         className="mb-3 text-xs font-atkinson-bold text-[#2f3b69] text-center uppercase"
                         style={{ letterSpacing: 1 }}
                       >
-                        Acesse minhas redes =)
+                        Acesse minhas redes ヅ
                       </Text>
                       <View className="flex-row gap-3">
                         <SocialButton
