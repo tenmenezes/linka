@@ -10,7 +10,7 @@ O **Linka** é uma plataforma desenvolvida para conectar alunos universitários 
 
 A proposta é simples: criar um ambiente onde estudantes possam **exibir seus projetos**, enquanto empresas podem **descobrir talentos, investir em ideias e criar oportunidades reais**.
 
-O Linka não é apenas um repositório de projetos — é um **ecossistema de conexão**, aprendizado e crescimento profissional.
+O Linka não é apenas um repositório de projetos, é um **ecossistema de conexão**, aprendizado e crescimento profissional.
 
 ---
 
@@ -56,29 +56,45 @@ Um app que realmente **"Linka" todos nós**.
 
 ---
 
-## Tecnologias Utilizadas
+## Tecnologias Utilizadas / Planejadas
 
 ### Frontend
 - React
 - React Native
 - NativeWind
-- OAuth
-- JWT
-- Bcrypt
 - Zod
 
-### Backend (API)
-- Node.js
-- Express
-- ORM (Prisma ou Drizzle)
-
-### Banco de Dados
+### Backend (API / AUTH / DB)
 - Supabase
-- Supabase Storage
+
+### APIs Externas
+
+- Pagamentos
+- - Stripe js: 
+- - - https://docs.stripe.com/js
+- Autenticação
+- - Supabase Auth: 
+- - - https://supabase.com/docs/guides/auth
+- Notificações
+- - Expo Notifications: 
+- - - https://docs.expo.dev/versions/latest/sdk/notifications/
+- - OneSignal: 
+- - - https://documentation.onesignal.com/docs/en/react-native-sdk-setup
+- Backend mais robusto
+- - Supabase Edge Functions:
+- - - https://supabase.com/docs/guides/functions
+- - Supabase Storage: 
+- - - https://supabase.com/docs/guides/storage
+- Chat / Feed em tempo real
+- - Supabase RealTime: 
+- - - https://supabase.com/docs/guides/realtime
+- Análise de usuários / eventos
+- - FireBase Analytics: 
+- - - https://firebase.google.com/docs/analytics?hl=pt-br
 
 ---
 
-## 📂 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```bash
 ├── app
@@ -98,7 +114,7 @@ Um app que realmente **"Linka" todos nós**.
 ├── assets
 │   ├── fonts
 │   │   ├── AtkinsonHyperlegible-Bold.ttf
-│   │   └── AtkinsonHyperlegible-Regular.ttf
+│   │   └──  AtkinsonHyperlegible-Regular.ttf
 │   ├── images
 │   │   ├── members
 │   │   │   ├── membro1.png
@@ -270,15 +286,10 @@ Um app que realmente **"Linka" todos nós**.
 git clone https://github.com/seu-usuario/linka.git
 cd linka
 ```
-### Backend
 
-```bash
-cd backend
-npm install
-```
 ### Criar arquivo `.env` baseado no `.env.example`
 
-### Mobile (React Native)
+### Rodando Projeto (React Native)
 
 ```bash
 cd frontend
@@ -321,15 +332,15 @@ git push origin feature/minha-feature
 
 ## Boas práticas de Commit
 
-Para que o seu pull request e suas alterações sejam aceitas, é necessário que seja seguido as boas práticas de commit.
+Para que o seu pull request e suas alterações sejam aceitas, é necessário que siga as boas práticas de commit.
 
-### Acesse Aqui: [Boas Práticas](./RULES_COMMIT.md)
+### Acesse Aqui: [Boas Práticas de Commit](./RULES_COMMIT.md)
 
 ---
 
-## 👥 Equipe
+## Equipe
 
-### 🚧 Desenvolvedores
+### Desenvolvedores / Contribuidores
 
 |  |  |
 |--|--|
