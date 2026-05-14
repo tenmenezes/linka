@@ -29,7 +29,7 @@ export default function ProfileScreen() {
         <View className="flex-row justify-between bg-[#002B5B] items-center px-5 py-4">
           <View className="flex flex-row items-center gap-4">
             <View className="bg-black/40 rounded-xl p-1">
-              <Image source={Logo} style={{ width: 30, height: 30 }} resizeMode='contain' />
+              <Image source={Logo} style={{ width: 40, height: 40 }} resizeMode='contain' />
             </View>
             <Text className="text-white text-xl font-bold font-atkison-bold">Meu Perfil</Text>
           </View>
@@ -40,7 +40,7 @@ export default function ProfileScreen() {
 
         { /* Identidade do Usuário */ }
         <ScrollView
-          showsverticalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: insets.bottom + TAB_BAR_HEIGHT + 20 }}
         >
           <View className="px-5 pb-20 pt-6 bg-[#002b5b] items-center">
