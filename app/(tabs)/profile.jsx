@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import ProjectCard from '../../components/home/ProjectCard';
 import { router } from 'expo-router';
 
 import { TAB_BAR_HEIGHT } from '../../constants/layout';
@@ -18,7 +19,16 @@ export default function ProfileScreen() {
     registration: "2021123456",
     university: "Universidade exemplo",
     semester: "4° semestre",
-    avatarUrl: "https://github.com/mizuno-p.png"
+    avatarUrl: "https://github.com/mizuno-p.png",
+    field: "Desenvolvimento Full Stack",
+    tools: "Git/Github, JavaScript, React, Next.js",
+    languages: "Inglês, Espanhol",
+    skills: "Boa comunicação, trabalho em equipe, metodologias ágeis",
+
+    projects: [
+      { id: '1', title: "E-commerce Comunitário", subtitle: "Projeto Acadêmico / Extensão" },
+      { id: '2', title: "Plataforma de Mediação Escolar", subtitle: "Trabalho de Conclusão" }
+    ]
   };
 
   return (
@@ -76,11 +86,43 @@ export default function ProfileScreen() {
             </InfoCard>
 
             {/* Dados acadêmicos */}
-            <InfoCard title="dados Acadêmicos" icon="school-outline">
+            <InfoCard title="Dados Acadêmicos" icon="school-outline">
               <InfoRow label="Matrícula" value={userData.registration} />
               <InfoRow label="Universidade" value={userData.university} />
               <InfoRow label="Curso" value={userData.course} />
               <InfoRow label="Semestre" value={userData.semester} isLast />
+            </InfoCard>
+
+            {/* Habilidades */}
+            <InfoCard title="Habilidades" icon="star-outline" onEdit={() => {}}>
+              <InfoRow label="Áreas de foco" value={userData.field} />
+              <InfoRow label="Ferramentas" value={userData.tools} />
+              <InfoRow label="Idiomas" value={userData.languages} />
+              <InfoRow label="Habilidades" value={userData.skills} isLast />
+            </InfoCard>
+
+            {/* Meus Projetos */}
+            <InfoCard title="Projetos Publicados" icon="folder-open-outline">
+                <View className="gap-y-3 pt-1">
+                  {userData.projects && userData.projects.lenght > 0 ? (
+                    userData.projects.map((project) => (
+                      <ProjectCard
+                        key={project.id}
+                        title={project.title}
+                        subtitle={project.subtitle}
+                      />
+                    ))
+                  ) : (
+                    <Text className="text-zinc-400 text-sm italic py-2 text-center">
+                      Nenhum projeto publicado ainda.
+                    </Text>
+                  )}
+                </View>
+            </InfoCard>
+
+            {/* Links Externos */}
+            <InfoCard title="Links Externos" icon="link-outline">
+              <InfoRow label="LinkedIn" icon="logo-linkedin" isAction />
             </InfoCard>
 
             {/* Segurança */}
@@ -118,7 +160,7 @@ function InfoCard({ title, icon, children, onEdit }) {
         </View>
         {onEdit && (
           <TouchableOpacity onPress={onEdit} className="border border-blue-600 px-3 py-1 rounded-lg">
-            <Text className="text-blue-600 font-medium text-xs">Editar dados</Text>
+            <Text className="text-blue-600 font-medium text-xs">Editar</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -128,12 +170,13 @@ function InfoCard({ title, icon, children, onEdit }) {
 }
 
 {/* Linha de individual de dados */}
-function InfoRow({ label, value, isLast, isAction, statusColor }) {
+function InfoRow({ label, value, isLast, isAction, statusColor, icon }) {
   return (
     <View className={`flex-row justify-between py-3 ${!isLast ? 'border-b border-zinc-200/50' : ''}`}
       accessible={true}
       accessibilityLabel={`${label}: ${value}`}
     >
+      <Ionicons name={icon} size={20} color="#002b5b" />
       <Text className="text-zinc-500 text-sm">{label}</Text>
       <View className="flex-row items-center flex-1 justify-end ml-4">
         <Text
